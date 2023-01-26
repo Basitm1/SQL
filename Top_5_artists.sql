@@ -17,7 +17,7 @@ FROM songs
 INNER JOIN global_song_rank AS ranking
 	ON songs.song_id = ranking.song_id
 WHERE ranking.rank <= 10
-GROUP BY songs.artist_id;
+GROUP BY songs.artist_id desc;
 
 
 /* Now we need to rank the artists based on the number of times their songs appeared in the Top 10 chart. In order to accomplish this, we use the above query as a subquery and implement DENSE_RANK window function. DENSE_RANK will help us create a ranking which will be based on the number of times an artists’ songs have appeared in a descending order. You may think RANK would essentially work the same, but we are using DENSE_RANK instead of RANK since RANK skips the next number however, in this case we do not want to skip any numbers. */
